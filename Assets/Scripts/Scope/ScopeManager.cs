@@ -5,10 +5,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
     public TextMeshProUGUI scoreText;
-
     [HideInInspector] public int totalScore = 0;
-
-    // Лічильники для статистики
     [HideInInspector] public int simpleCount = 0;
     [HideInInspector] public int mediumCount = 0;
     [HideInInspector] public int hardCount = 0;
@@ -19,8 +16,6 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int points, string type)
     {
         totalScore += points;
-
-        // Рахуємо кількість за типом
         if (type == "Simple") simpleCount++;
         else if (type == "Medium") mediumCount++;
         else if (type == "Hard") hardCount++;

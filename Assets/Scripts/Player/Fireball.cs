@@ -6,30 +6,29 @@ public class Fireball : MonoBehaviour
     public float explosionForce = 10f;
     public float explosionRadius = 3f;
     public float bonusTimeAmount = 10f;
-
-    // ДОДАЙ ЦІ ДВА РЯДКИ:
     public float flySpeed = 50f;
     private Rigidbody rb;
 
     void Start()
     {
-        // Отримуємо посилання на Rigidbody відразу
         rb = GetComponent<Rigidbody>();
         Destroy(gameObject, lifeTime);
     }
 
-    // ДОДАЙ ЦЕЙ МЕТОД ПОВНІСТЮ:
     public void Launch()
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
 
-        // Надаємо швидкість ТІЛЬКИ коли цей метод викликано
         rb.linearVelocity = transform.forward * flySpeed;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") || other.CompareTag("SpawnZone")) return;
-
+        BaseTarget target = other.GetComponent<BaseTarget>();
+        if (target != null)
+        {
+            target.OnHit();
+        }
         if (other.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
             if (other.CompareTag("Bonus"))

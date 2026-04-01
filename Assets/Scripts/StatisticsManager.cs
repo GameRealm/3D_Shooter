@@ -12,7 +12,6 @@ public class StatisticsManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI bonusStatsText;
     public TextMeshProUGUI detailedTargetsText;
-
     [Header("Поле для фінальної цитати")]
     public TextMeshProUGUI quoteText; 
 

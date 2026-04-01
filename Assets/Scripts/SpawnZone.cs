@@ -7,21 +7,19 @@ public class SpawnZone : MonoBehaviour
     {
         public GameObject prefab;
         [Range(0, 100)]
-        public float spawnChance; // Шанс появи (наприклад: 70, 20, 10)
+        public float spawnChance; 
     }
 
     [Header("Налаштування префабів")]
     public SpawnableObject[] targets;
-
     [Header("Налаштування часу")]
-    public float spawnInterval = 2f; // Частота спавну (раз на 2 секунди)
+    public float spawnInterval = 2f; 
 
     private BoxCollider spawnArea;
     private float nextSpawnTime;
 
     void Awake()
     {
-        // Отримуємо коллайдер, який буде межею зони
         spawnArea = GetComponent<BoxCollider>();
         if (spawnArea == null)
         {
@@ -49,7 +47,6 @@ public class SpawnZone : MonoBehaviour
         }
     }
 
-    // Розрахунок рандомної позиції всередині BoxCollider
     Vector3 GetRandomPositionInBounds()
     {
         Bounds bounds = spawnArea.bounds;
@@ -60,7 +57,6 @@ public class SpawnZone : MonoBehaviour
         );
     }
 
-    // Вибір префаба з урахуванням співвідношення (шансів)
     GameObject GetRandomPrefabByWeight()
     {
         float totalWeight = 0;
@@ -77,7 +73,6 @@ public class SpawnZone : MonoBehaviour
                 return obj.prefab;
             }
         }
-
         return null;
     }
 }

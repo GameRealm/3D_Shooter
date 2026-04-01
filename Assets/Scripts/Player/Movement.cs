@@ -42,26 +42,20 @@ public class Movement : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
-        HandleRotation(); // Пріоритет №1
-        ApplyMovement();  // Пріоритет №2
+        HandleRotation(); 
+        ApplyMovement(); 
     }
 
     private void HandleRotation()
     {
-        // Отримуємо дельту миші (наскільки пікселів вона зсунулася за кадр)
         Vector2 lookInput = controls.Player.Look.ReadValue<Vector2>();
 
-        // Якщо відчуваєш, що 720 міняється на 360, прибираємо множник 0.1f 
-        // або замінюємо його на 1.0f для прямого вводу
         float mouseX = lookInput.x * sensitivity;
         float mouseY = lookInput.y * sensitivity;
 
         yRotation += mouseX;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-
-        // ПРЯМИЙ ПОВОРОТ: Без Slerp чи Lerp, щоб модель не "доганяла" мишку, 
-        // а була прибита до неї залізно.
         transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
         if (playerCamera != null)
@@ -74,18 +68,14 @@ public class Movement : MonoBehaviour
     {
         moveInput = controls.Player.Move.ReadValue<Vector2>();
 
-        // Тепер, коли мишка крутить тіло миттєво, 
-        // напрямок руху завжди ідеально збігається з поглядом.
         Vector3 move = transform.forward * moveInput.y + transform.right * moveInput.x;
 
         controller.Move(move * speed * Time.deltaTime);
 
-        // Гравітація
         if (controller.isGrounded && playerVelocity.y < 0) playerVelocity.y = -2f;
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        // Анімація (використовуємо Magnitude для загальної швидкості)
         if (anim != null)
         {
             anim.SetFloat("Magnitude", moveInput.magnitude, 0.05f, Time.deltaTime);

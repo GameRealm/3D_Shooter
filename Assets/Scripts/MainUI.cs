@@ -1,37 +1,44 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // Обов'язково для керування сценами
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-    // Метод для кнопки "Старт" або "Почати гру"
+    [Header("Налаштування звуку")]
+    public AudioSource audioSource;  
+    public AudioClip clickSound;   
+
+    private void PlayClickSound()
+    {
+        if (audioSource != null && clickSound != null)
+        {
+            audioSource.PlayOneShot(clickSound);
+        }
+    }
+
     public void StartGame()
     {
-        // Отримуємо індекс поточної сцени та додаємо 1
+        PlayClickSound();
+        Invoke("LoadNextScene", 0.2f);
+    }
+
+    private void LoadNextScene()
+    {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-        // Перевіряємо, чи існує наступна сцена в списку Build Settings
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(nextSceneIndex);
         }
         else
         {
-            Debug.LogWarning("Наступної сцени не існує в Build Settings!");
+            Debug.LogWarning("Наступної сцени не існує!");
         }
     }
 
-    // Метод для кнопки "Вихід"
     public void OnExitButton()
     {
-        Debug.Log("Вихід з гри...");
-
-        // Працює у зібраній грі (.exe, .app)
+        PlayClickSound();
         Application.Quit();
-
-        // Якщо ти тестуєш у самому редакторі Unity, додаємо це:
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
     }
 }
