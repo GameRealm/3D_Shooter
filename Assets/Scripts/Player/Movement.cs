@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
 
     [Header("Камера та пріоритет миші")]
     public Transform playerCamera;
-    public float sensitivity = 2.0f;
+    public float sensitivity = 0.4f;
     private float xRotation = 0f;
     private float yRotation = 0f;
 
@@ -50,12 +50,13 @@ public class Movement : MonoBehaviour
     {
         Vector2 lookInput = controls.Player.Look.ReadValue<Vector2>();
 
-        float mouseX = lookInput.x * sensitivity;
-        float mouseY = lookInput.y * sensitivity;
+        float mouseX = lookInput.x * sensitivity * Time.deltaTime * 100f;
+        float mouseY = lookInput.y * sensitivity * Time.deltaTime * 100f;
 
         yRotation += mouseX;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
         transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
         if (playerCamera != null)

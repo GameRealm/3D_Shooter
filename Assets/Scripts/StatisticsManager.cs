@@ -38,7 +38,7 @@ public class StatisticsManager : MonoBehaviour
         SetFinalQuote(sm.totalScore);
 
         if (sm.totalScore >= PlayerPrefs.GetInt("HighScore") && sm.totalScore > 0)
-            finalScoreText.text += " <color=yellow>(пейнпд!)</color>";
+            finalScoreText.text += " <color=yellow>(RECORD!)</color>";
     }
 
     private void SetFinalQuote(int score)
