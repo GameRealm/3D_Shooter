@@ -1,6 +1,10 @@
+
 #  PyroProtocol
 
 A fast-paced third-person shooter set in a training simulator, where the focus is on movement and aiming at targets. 
+
+<img width="854" height="413" alt="GIf" src="https://github.com/user-attachments/assets/fbd70e98-e5d4-4089-a93a-7eb70ff68580" />
+
 
 ## 🎮Play
 [Play on itch.io] [link](https://historyloom.itch.io/pyroprotocol)
@@ -35,22 +39,25 @@ Prototype
 - Clear player feedback
 - Encouraging player decision-making
 
-## 🏛️ Project Structure
+### 🏛️ Project Structure
 
+```text
 Assets/
-├── Art/
-│   ├── GameTexture/
-│   ├── Model/
-│   ├── Skybox/
-│   └── Water/
-├── Gameplay/
-│   ├── Animations/
-│   ├── Targets/
-│   └── Objects/
-├── Scenes/
-├── Scripts/
-│   ├── Player/
-│   ├── Scope/
-│   └── Targets/
-├── Settings/
-├── TextMesh Pro/
+ ├── Art/
+ │    ├── GameTexture/
+ │    ├── Model/
+ │    ├── Skybox/
+ │    └── Water/
+ ├── Gameplay/
+ │    ├── Animations/
+ │    └── Targets/
+ ├── Objects/
+ ├── Scenes/
+ ├── Scripts/
+ │    ├── Player/
+ │    ├── Scope/
+ │    └── Targets/
+ ├── Settings/
+ └── TextMesh Pro/
+```
+
